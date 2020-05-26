@@ -39,7 +39,8 @@ app.get('/help', (req, res) => {
     res.render('help', {
         title: 'Help',
         name: 'Murtaza Godhrawala',
-        message: 'Contact me at my email'
+        message: 'You can reach out to me at murtazagodhrawala94@gmail.com.',
+        githubRepo: 'https://github.com/murtaza420/weather-nodejs'
     })
 })
 
@@ -57,15 +58,14 @@ app.get('/weather', (req, res) => {
             })
         }
 
-        forecast(latitude, longitude, (error, { temperature, feelsLike } = {}) => {
+        forecast(latitude, longitude, (error, { forecast } = {}) => {
             if (error) {
                 return res.send({
                     error
                 })
             }
-
             res.send({
-                forecast: 'It is currently ' + temperature + ' degrees outside. It feels like ' + feelsLike + ' degrees outside.',
+                forecast,
                 location,
                 address: req.query.address
             })
